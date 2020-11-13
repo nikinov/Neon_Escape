@@ -40,6 +40,7 @@ public class MoveController : MonoBehaviour
             OnMoveStart();
         if (( Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A)) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && OnMoveEnd != null)
             OnMoveEnd();
+        HasLanded();
     }
     private void FixedUpdate()
     {
@@ -67,7 +68,7 @@ public class MoveController : MonoBehaviour
         
         // if the distance between the player and the ground is less then 0.5 then make jump possible again
         
-        if (hit && hit.distance < 10.5)
+        if (hit && hit.distance < 1.5)
         {
             if (_isInJump)
             {
@@ -76,11 +77,6 @@ public class MoveController : MonoBehaviour
                     OnJumpEnd();
             }
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        HasLanded();
     }
 
     IEnumerator waitForJump()
