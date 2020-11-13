@@ -40,7 +40,6 @@ public class MoveController : MonoBehaviour
             OnMoveStart();
         if (( Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A)) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && OnMoveEnd != null)
             OnMoveEnd();
-        HasLanded();
     }
     private void FixedUpdate()
     {
@@ -61,7 +60,12 @@ public class MoveController : MonoBehaviour
                 OnJumpStart();
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        HasLanded();
+    }
+
     private void HasLanded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, _layerMaskToIgnore);
