@@ -47,7 +47,7 @@ public class MoveController : MonoBehaviour
     private void HasLanded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, layerMaskToIgnore);
-        if (hit && hit.distance < .415)
+        if (hit && hit.distance < .5)
         {
             if (isInJump)
                 isInJump = false;
