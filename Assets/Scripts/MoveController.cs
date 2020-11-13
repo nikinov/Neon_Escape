@@ -7,12 +7,15 @@ public class MoveController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float drag;
     [SerializeField] private float jumpForce;
+    [SerializeField] private LayerMask layerMaskToIgnore;
     private Rigidbody2D moveRb;
+    private bool isInJump;
     
     // Start is called before the first frame update
     void Start()
     {
         moveRb = GetComponent<Rigidbody2D>();
+        isInJump = false;
     }
 
     // Update is called once per frame
@@ -22,6 +25,8 @@ public class MoveController : MonoBehaviour
         {
             Jump();
         }
+        if(isInJump)
+            HasLanded();
     }
     private void FixedUpdate()
     {
@@ -33,16 +38,21 @@ public class MoveController : MonoBehaviour
     }
     private void Jump()
     {
-        moveRb.velocity += Vector2.up * jumpForce;
+        if (!isInJump)
+        {
+            isInJump = true;
+            moveRb.velocity += Vector2.up * jumpForce;
+        }
     }
     
     private void HasLanded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-        if (hit && hit.distance < .382f)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, layerMaskToIgnore);
+        print(hit.distance);
+        if (hit && hit.distance < .42f)
         {
-            
+            if (isInJump)
+                isInJump = false;
         }
-
     }
 }
