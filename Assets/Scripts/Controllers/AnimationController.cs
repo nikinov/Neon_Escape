@@ -41,7 +41,6 @@ public class AnimationController : MonoBehaviour
 
     void AnimationTick()
     {
-        Debug.Log(_CurrentAnimationStage);
         _PreviousTime = Time.time;
         switch (CurrentPlayerState) {
             case PlayerActionState.IDLE:

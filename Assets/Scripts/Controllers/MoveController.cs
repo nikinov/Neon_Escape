@@ -67,7 +67,7 @@ public class MoveController : MonoBehaviour
         
         // if the distance between the player and the ground is less then 0.5 then make jump possible again
         
-        if (hit && hit.distance < .5)
+        if (hit && hit.distance < 10.5)
         {
             if (_isInJump)
             {
