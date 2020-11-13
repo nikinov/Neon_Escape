@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b43e99af-4b9b-4524-880d-a860b9c448cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/PhysicsMaterial/Slippery.physicsMaterial2D" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PhysicsMaterial/Slippery.physicsMaterial2D" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/testScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/testScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605259507556</updated>
-      <workItem from="1605259509846" duration="1260000" />
+      <workItem from="1605259509846" duration="2781000" />
     </task>
     <servers />
   </component>
