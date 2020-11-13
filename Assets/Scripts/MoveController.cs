@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,8 +26,6 @@ public class MoveController : MonoBehaviour
         {
             Jump();
         }
-        if(isInJump)
-            HasLanded();
     }
     private void FixedUpdate()
     {
@@ -40,19 +39,43 @@ public class MoveController : MonoBehaviour
     {
         if (!isInJump)
         {
-            isInJump = true;
             moveRb.velocity += Vector2.up * jumpForce;
+            StartCoroutine(waitForJump());
         }
     }
     
     private void HasLanded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, layerMaskToIgnore);
-        print(hit.distance);
-        if (hit && hit.distance < .42f)
+        if (hit && hit.distance < .415)
         {
             if (isInJump)
                 isInJump = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        HasLanded();
+    }
+
+    IEnumerator waitForJump()
+    {
+        yield return new WaitForEndOfFrame();
+        isInJump = true;
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

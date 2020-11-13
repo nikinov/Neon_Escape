@@ -267,7 +267,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 20
+  m_GravityScale: 15
   m_Material: {fileID: 6200000, guid: b3eaa85c893694cb690749f3e5099d8b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -376,9 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8588c36653a54cf3a1dd0a459b48492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1000
+  moveSpeed: 2500
   drag: 0.2
-  jumpForce: 50
+  jumpForce: 35
   layerMaskToIgnore:
     serializedVersion: 2
     m_Bits: 55
