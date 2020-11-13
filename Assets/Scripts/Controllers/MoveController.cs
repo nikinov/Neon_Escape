@@ -13,19 +13,19 @@ public class MoveController : MonoBehaviour
     public static event JumpStartAction OnJumpStart;
     public delegate void JumpEndAction();
     public static event JumpEndAction OnJumpEnd;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float drag;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private LayerMask layerMaskToIgnore;
-    private Rigidbody2D moveRb;
-    private bool isInJump;
-    private float horMove;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _drag;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private LayerMask _layerMaskToIgnore;
+    private Rigidbody2D _moveRb;
+    private bool _isInJump;
+    private float _horMove;
     
     // Start is called before the first frame update
     void Start()
     {
-        moveRb = GetComponent<Rigidbody2D>();
-        isInJump = false;
+        _moveRb = GetComponent<Rigidbody2D>();
+        _isInJump = false;
     }
 
     // Update is called once per frame
@@ -35,26 +35,26 @@ public class MoveController : MonoBehaviour
         {
             Jump();
         }
-        horMove = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        _horMove = Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime;
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) && OnMoveStart != null)
             OnMoveStart();
-        if (( Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A)) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (( Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A)) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && OnMoveEnd != null)
             OnMoveEnd();
     }
     private void FixedUpdate()
     {
-        Vector2 vel = moveRb.velocity;
-        vel.x += horMove;
-        vel.x *= drag;
-        moveRb.velocity = vel;
+        Vector2 vel = _moveRb.velocity;
+        vel.x += _horMove;
+        vel.x *= _drag;
+        _moveRb.velocity = vel;
     }
     private void Jump()
     {
         // if is not in the air jump
         
-        if (!isInJump)
+        if (!_isInJump)
         {
-            moveRb.velocity += Vector2.up * jumpForce;
+            _moveRb.velocity += Vector2.up * _jumpForce;
             StartCoroutine(waitForJump());
             if(OnJumpStart != null)
                 OnJumpStart();
@@ -63,15 +63,15 @@ public class MoveController : MonoBehaviour
     
     private void HasLanded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, layerMaskToIgnore);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, _layerMaskToIgnore);
         
         // if the distance between the player and the ground is less then 0.5 then make jump possible again
         
         if (hit && hit.distance < .5)
         {
-            if (isInJump)
+            if (_isInJump)
             {
-                isInJump = false;
+                _isInJump = false;
                 if(OnJumpEnd != null)
                     OnJumpEnd();
             }
@@ -86,7 +86,7 @@ public class MoveController : MonoBehaviour
     IEnumerator waitForJump()
     {
         yield return new WaitForEndOfFrame();
-        isInJump = true;
+        _isInJump = true;
         
     }
 }
