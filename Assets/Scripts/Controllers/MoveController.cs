@@ -72,7 +72,7 @@ public class MoveController : MonoBehaviour
         
         // if the distance between the player and the ground is less then 0.5 then make jump possible again
         
-        if (hit && hit.distance < 1.5)
+        if (hit && hit.distance < 1.5f)
         {
             if (_isInJump)
             {
@@ -87,7 +87,9 @@ public class MoveController : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         _isInJump = true;
-        
+        yield return new WaitForSeconds(1f);
+        if (_isInJump)
+            HasLanded();
     }
 }
 

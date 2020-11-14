@@ -5,25 +5,32 @@ using UnityEngine;
 
 public class ProgressController : MonoBehaviour
 {
-    public int CurrentLevel { get; private set; }
+    [HideInInspector]public int CurrentLevel;
 
     private void Start()
     {
-        // get the current Level
-        if (PlayerPrefs.GetInt("level") != null)
-        {
-            PlayerPrefs.SetInt("level", 0);
-            CurrentLevel = 0;
-        }
-        else
+        CurrentLevel = 0;
+        if (PlayerPrefs.GetInt("level") >= 0)
         {
             CurrentLevel = PlayerPrefs.GetInt("level");
         }
+        else
+        {
+            CurrentLevel = 0;
+            PlayerPrefs.SetInt("level", 0);
+        }
     }
     
-    public void AddLevel()
+    public void SetCheckpoint(int level=-1)
     {
-        CurrentLevel += 1;
+        if (level == -1)
+        {
+            CurrentLevel += 1;
+        }
+        else
+        {
+            CurrentLevel = level;
+        }
         PlayerPrefs.SetInt("level",CurrentLevel);
     }
     

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class MainMenuManager : MonoBehaviour
 
     IEnumerator waitForBlackPanel(float fade, int StartNewScene=-1)
     {
-        BlackPanel.DOFade(1, BlackPanelFadeTime);
+        BlackPanel.DOFade(fade, BlackPanelFadeTime);
         if(!BlackPanel.gameObject)
             BlackPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(BlackPanelFadeTime);
@@ -35,7 +36,7 @@ public class MainMenuManager : MonoBehaviour
             BlackPanel.gameObject.SetActive(false);
         if (StartNewScene >= 0)
         {
-            
+            SceneManager.LoadScene(StartNewScene);
         }
     }
 }
